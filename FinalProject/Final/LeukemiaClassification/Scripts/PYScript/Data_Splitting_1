@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov 27 00:24:47 2021
+
+@author: gunnikrishnan
+"""
+
+#%%
+import os
+from os import path
+import shutil
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+
+#%%
+
+##Saving all the file names
+
+#ALL is the data with Acute Lymphoblastic Leukemia (ALL)
+
+fold0_all = "/Users/gunnikrishnan/Documents/Ragi/HoodCollege/FirstSem/DeepLearning/Scripts/Project/Data/C-NMC_New/training_data/fold_0/all"
+fold1_all = "/Users/gunnikrishnan/Documents/Ragi/HoodCollege/FirstSem/DeepLearning/Scripts/Project/Data/C-NMC_New/training_data/fold_1/all"
+fold2_all = "/Users/gunnikrishnan/Documents/Ragi/HoodCollege/FirstSem/DeepLearning/Scripts/Project/Data/C-NMC_New/training_data/fold_2/all"
+
+#hem is the normal one
+fold0_nrml = "/Users/gunnikrishnan/Documents/Ragi/HoodCollege/FirstSem/DeepLearning/Scripts/Project/Data/C-NMC_New/training_data/fold_0/hem"
+fold1_nrml = "/Users/gunnikrishnan/Documents/Ragi/HoodCollege/FirstSem/DeepLearning/Scripts/Project/Data/C-NMC_New/training_data/fold_1/hem"
+fold2_nrml = "/Users/gunnikrishnan/Documents/Ragi/HoodCollege/FirstSem/DeepLearning/Scripts/Project/Data/C-NMC_New/training_data/fold_2/hem"
+
+#%%
+
+
+def get_path_image(folder):
+    image_paths = []
+    image_fnames = os.listdir(folder) 
+    for img_id in range(len(image_fnames)):
+        img = os.path.join(folder,image_fnames[img_id])
+        image_paths.append(img)
+    
+    return image_paths
+
+    
+#image absolute paths for cancer cells and normal cells
+all_train_imgs = []
+
+for i in [fold0_all,fold1_all,fold2_all]:
+    paths = get_path_image(i)
+    all_train_imgs.extend(paths)
+    
+    
+print(len(all_train_imgs))
+
+normal_train_imgs = []
+for i in [fold0_nrml,fold1_nrml,fold2_nrml]:
+    paths = get_path_image(i)
+    normal_train_imgs.extend(paths)
+   
+   
+print(len(normal_train_imgs))
+
